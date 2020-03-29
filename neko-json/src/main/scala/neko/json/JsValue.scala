@@ -6,7 +6,6 @@ trait JsValue {
   def \(key: String): JsPath
   def \(key: Int): JsPath
   final def as[T](implicit c: JsonDecoder[T]): Option[T]            = c.decode(this)
-  final def asOpt[T](implicit c: JsonDecoder[T]): Option[Option[T]] = c.decodeOpt(this)
 }
 case class JsString(value: String) extends JsValue {
   override def apply(key: String): JsValue = throw new NoSuchElementException
@@ -51,5 +50,4 @@ case class JsPath(getOption: Option[JsValue]) {
   def \(key: String): JsPath                                        = JsPath(getOption.map(_ \ key).flatMap(_.getOption))
   def \(key: Int): JsPath                                           = JsPath(getOption.map(_ \ key).flatMap(_.getOption))
   final def as[T](implicit c: JsonDecoder[T]): Option[T]            = getOption.flatMap(c.decode(_))
-  final def asOpt[T](implicit c: JsonDecoder[T]): Option[Option[T]] = Some(getOption.flatMap(c.decodeOpt(_)).flatten)
 }

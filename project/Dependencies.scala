@@ -6,4 +6,8 @@ object Dependencies {
     "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2"
   )
 
+  val testDeps = Seq(
+    "com.novocode" % "junit-interface" % "0.11" % "test",
+  )
+
 }
