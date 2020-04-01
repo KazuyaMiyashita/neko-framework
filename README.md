@@ -1,10 +1,32 @@
-## sbt project cross-compiled with Dotty and Scala 2
+## Neko Framework
 
-### Usage
+Neko Framework (Dotty), Neko means "cat" but it's not category
 
-This is a normal sbt project, you can compile code with `sbt compile` and run it
-with `sbt run`, `sbt console` will start a Dotty REPL. For more information on
-cross-compilation in sbt, see <https://www.scala-sbt.org/1.x/docs/Cross-Build.html>.
+### neko-json
 
-For more information on the sbt-dotty plugin, see the
-[dotty-example-project](https://github.com/lampepfl/dotty-example-project/blob/master/README.md).
+neko-json is an AST-based JSON library that can derive Encoder and Decoder with macros.
+
+#### Usage
+
+```scala
+case class Nyan(foo: Int, bar: String)
+
+val nyan = Nyan(42, "Bar")
+val encoder = summon[JsonEncoder[Nyan]]
+val json: JsValue = encoder.encode(nyan)
+// Json.obj(
+//   "nyan" -> Json.obj(
+//     "foo" -> Json.num(42.0),
+//     "bar" -> Json.str("Bar")
+//   )
+// )
+
+val decoder = summon[JsonDecoder[Nyan]]
+val nyanOpt: Option[Nyan] = decoder.decode(json)
+// Some(Nyan(42, "Bar"))
+```
+
+
+### neko-jdbc
+
+// TODO
