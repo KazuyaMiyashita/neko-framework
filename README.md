@@ -2,6 +2,15 @@
 
 Neko Framework (Dotty), Neko means "cat" but it's not category
 
+### maven repository
+
+```scala
+resolvers += "Github Repository" at "https://kazuyamiyashita.github.io/neko-framework/mvn-repo/",
+libraryDependencies += "com.kazmiy" %% "neko-server" % "1.0.0",
+libraryDependencies += "com.kazmiy" %% "neko-jdbc" % "1.0.0",
+libraryDependencies += "com.kazmiy" %% "neko-json" % "1.0.0",
+```
+
 ### neko-json
 
 neko-json is an AST-based JSON library that can derive Encoder and Decoder with macros.
@@ -172,3 +181,5 @@ connectionIORunner.runTx(io)
 
 A simple http server.
 At this time the request response can only handle strings.
+
+for example: https://github.com/KazuyaMiyashita/neko-server-example
