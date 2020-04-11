@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.kazmiy</groupId>
+    <artifactId>neko-server_0.23</artifactId>
+    <packaging>jar</packaging>
+    <description>neko-server</description>
+    <version>1.0.0</version>
+    <name>neko-server</name>
+    <organization>
+        <name>com.kazmiy</name>
+    </organization>
+    <dependencies>
+        <dependency>
+            <groupId>ch.epfl.lamp</groupId>
+            <artifactId>dotty-library_0.23</artifactId>
+            <version>0.23.0-RC1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-parser-combinators_2.13</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.novocode</groupId>
+            <artifactId>junit-interface</artifactId>
+            <version>0.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

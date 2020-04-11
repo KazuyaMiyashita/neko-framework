@@ -21,11 +21,15 @@ lazy val root = project
     commonSettings,
     libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test",
   )
+  .aggregate(json, jdbc, server)
 
 
 lazy val json = (project in file("neko-json"))
   .settings(
     name := "neko-json",
+    organization := "com.kazmiy",
+    version := "1.0.0",
+    publishTo := Some(Resolver.file("file", file("mvn-repo"))),
     commonSettings,
     libraryDependencies ++= Seq(
       jsonDeps,
@@ -36,6 +40,9 @@ lazy val json = (project in file("neko-json"))
 lazy val jdbc = (project in file("neko-jdbc"))
   .settings(
     name := "neko-jdbc",
+    organization := "com.kazmiy",
+    version := "1.0.0",
+    publishTo := Some(Resolver.file("file", file("mvn-repo"))),
     commonSettings,
     libraryDependencies ++= Seq(
       jsonDeps,
@@ -46,6 +53,9 @@ lazy val jdbc = (project in file("neko-jdbc"))
 lazy val server = (project in file("neko-server"))
   .settings(
     name := "neko-server",
+    organization := "com.kazmiy",
+    version := "1.0.0",
+    publishTo := Some(Resolver.file("file", file("mvn-repo"))),
     commonSettings,
     libraryDependencies ++= Seq(
       serverDeps,
