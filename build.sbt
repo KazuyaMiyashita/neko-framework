@@ -32,3 +32,13 @@ lazy val json = (project in file("neko-json"))
       testDeps
     ).flatten.map(_.withDottyCompat(scalaVersion.value)),
   )
+
+lazy val jdbc = (project in file("neko-jdbc"))
+  .settings(
+    name := "neko-jdbc",
+    commonSettings,
+    libraryDependencies ++= Seq(
+      jsonDeps,
+      testDeps
+    ).flatten.map(_.withDottyCompat(scalaVersion.value)),
+  )
