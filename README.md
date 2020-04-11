@@ -167,3 +167,8 @@ val connectionIORunner: ConnectionIORunner = TestConnectionIORunner(
 
 connectionIORunner.runTx(io)
 ```
+
+### neko-server
+
+A simple http server.
+At this time the request response can only handle strings.

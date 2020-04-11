@@ -10,6 +10,10 @@ object Dependencies {
     "mysql" % "mysql-connector-java" % "8.0.17" % Test
   )
 
+  val serverDeps = Seq(
+    "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2",
+  )
+
   val testDeps = Seq(
     "com.novocode" % "junit-interface" % "0.11" % Test,
   )
