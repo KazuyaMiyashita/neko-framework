@@ -4,7 +4,7 @@ import java.sql.ResultSet
 
 object query {
 
-  def select[T](resultSet: ResultSet, mapping: ResultSet => T): Option[T] = {
+  def first[T](resultSet: ResultSet, mapping: ResultSet => T): Option[T] = {
     Option.when(resultSet.next())(mapping(resultSet))
   }
 
