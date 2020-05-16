@@ -62,3 +62,14 @@ lazy val server = (project in file("neko-server"))
       testDeps
     ).flatten.map(_.withDottyCompat(scalaVersion.value)),
   )
+
+lazy val sandbox = (project in file("sandbox"))
+  .settings(
+    name := "sandbox",
+    organization := "com.kazmiy",
+    version := "1.0.0",
+    commonSettings,
+    libraryDependencies ++= Seq(
+      testDeps
+    ).flatten.map(_.withDottyCompat(scalaVersion.value)),
+  )
