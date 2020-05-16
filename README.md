@@ -9,6 +9,7 @@ resolvers += "Github Repository" at "https://kazuyamiyashita.github.io/neko-fram
 libraryDependencies += "com.kazmiy" %% "neko-server" % "1.0.0",
 libraryDependencies += "com.kazmiy" %% "neko-jdbc" % "1.0.0",
 libraryDependencies += "com.kazmiy" %% "neko-json" % "1.0.0",
+libraryDependencies += "com.kazmiy" %% "neko-fp" % "1.0.0",
 ```
 
 ### neko-json
@@ -183,3 +184,8 @@ A simple http server.
 At this time the request response can only handle strings.
 
 for example: https://github.com/KazuyaMiyashita/neko-server-example
+
+
+### neko-fp
+
+`Monad` and `EitherT`
