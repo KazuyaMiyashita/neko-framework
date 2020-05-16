@@ -56,7 +56,7 @@ object JsonDecoder {
         case m: Mirror.ProductOf[T] => {
           new JsonDecoder[T] {
             override def decode(value: JsValue): Option[T] = {
-              decodeElems[m.MirroredElemTypes, m.MirroredElemLabels](0).decode(value).map { p =>
+              decodeElems[m.MirroredElemTypes, m.MirroredElemLabels].decode(value).map { p =>
                 m.fromProduct(p.asInstanceOf[Product])
               }
             }
@@ -66,31 +66,27 @@ object JsonDecoder {
       }
   }
 
-  inline def tryDecoder[T]: JsonDecoder[T] = summonFrom {
-    case decodeElem: JsonDecoder[T] => decodeElem
-    case _ => error("`Decoder[$A] was not found")
-  }
-
-  inline def decodeElems[Elems <: Tuple, Labels <: Tuple](n: Int): JsonDecoder[Elems] = {
-    inline erasedValue[Elems] match {
-      case _: (e *: es) => {
-        inline erasedValue[Labels] match {
-          case _: (l *: ls) => {
-            val labelHead = constValue[l].asInstanceOf[String]
-            val decoderHead = tryDecoder[e]
-            val decoderTail: JsonDecoder[es] = decodeElems[es, ls](n + 1)
-            new JsonDecoder[Elems] {
-              override def decode(value: JsValue): Option[Elems] = {
-                (value \ labelHead).getOption.flatMap(decoderHead.decode).flatMap { h =>
-                  decoderTail.decode(value).map(t => (h *: t).asInstanceOf[Elems])
-                }
-              }
+  inline def decodeElems[Elems <: Tuple, Labels <: Tuple]: JsonDecoder[Elems] = {
+    inline (erasedValue[Elems], erasedValue[Labels]) match {
+      case (_: (e *: es), _: (l *: ls) ) => {
+        val labelHead = constValue[l].asInstanceOf[String]
+        val decoderHead: JsonDecoder[e] = tryDecoder[e]
+        val decoderTail: JsonDecoder[es] = decodeElems[es, ls]
+        new JsonDecoder[Elems] {
+          override def decode(value: JsValue): Option[Elems] = {
+            (value \ labelHead).getOption.flatMap(decoderHead.decode).flatMap { h =>
+              decoderTail.decode(value).map(t => (h *: t).asInstanceOf[Elems])
             }
           }
         }
       }
       case _: Unit => JsonDecoder.const(()).asInstanceOf[JsonDecoder[Elems]]
     }
+  }
+
+  inline def tryDecoder[T]: JsonDecoder[T] = summonFrom {
+    case decodeElem: JsonDecoder[T] => decodeElem
+    case _ => error("`Decoder[$A] was not found")
   }
 
   def const[T](value: T): JsonDecoder[T] = new JsonDecoder[T] {
