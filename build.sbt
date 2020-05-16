@@ -62,3 +62,15 @@ lazy val server = (project in file("neko-server"))
       testDeps
     ).flatten.map(_.withDottyCompat(scalaVersion.value)),
   )
+
+lazy val fp = (project in file("neko-fp"))
+  .settings(
+    name := "neko-fp",
+    organization := "com.kazmiy",
+    version := "1.0.0",
+    publishTo := Some(Resolver.file("file", file("mvn-repo"))),
+    commonSettings,
+    libraryDependencies ++= Seq(
+      testDeps
+    ).flatten.map(_.withDottyCompat(scalaVersion.value)),
+  )
